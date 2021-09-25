@@ -150,8 +150,8 @@ pgTSVector = IPT.castToType "tsvector" . HSD.quote
 pgTSQuery :: String -> Column PGTSQuery
 pgTSQuery = IPT.castToType "tsquery" . HSD.quote
 
-toTSQuery :: C.PGString a => Column a -> Column Int
-toTSQuery (C.Column e) = C.Column (HPQ.FunExpr "to_tsquery" [e])
+toTSQuery :: String -> Column Int
+toTSQuery q = C.Column (HPQ.FunExpr "to_tsquery" [q])
 
 pgArray :: forall a b. IsSqlType b
         => (a -> C.Column b) -> [a] -> C.Column (PGArray b)
