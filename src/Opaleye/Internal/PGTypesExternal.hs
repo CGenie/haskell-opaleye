@@ -176,6 +176,9 @@ pgTSVector = IPT.castToType "tsvector" . HSD.quote
 pgTSQuery :: String -> Column PGTSQuery
 pgTSQuery = IPT.castToType "tsquery" . HSD.quote
 
+toTSQuery :: String -> Column PGTSQuery
+toTSQuery q = C.Column (HPQ.FunExpr "to_tsquery" [HPQ.ConstExpr $ HPQ.StringLit q])
+
 instance IsSqlType SqlBool where
   showSqlType _ = "boolean"
 instance IsSqlType SqlDate where

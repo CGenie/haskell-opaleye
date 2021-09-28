@@ -225,5 +225,7 @@ sqlRange :: IsRangeType b
          -> F.Field (SqlRange b)
 sqlRange = P.pgRange
 
+-- TS vector Query
 sqlTSQuery :: String -> F.Field SqlTSQuery
 sqlTSQuery = P.pgTSQuery
+
