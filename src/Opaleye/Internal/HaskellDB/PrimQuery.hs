@@ -50,7 +50,7 @@ data Literal = NullLit
              | OtherLit String       -- ^ used for hacking in custom SQL
                deriving (Read,Show)
 
-data BinOp      = (:==) | (:<) | (:<=) | (:>) | (:>=) | (:<>)
+data BinOp      = (:==) | (:<) | (:<=) | (:>) | (:>=) | (:<>) | (:@@)
                 | OpAnd | OpOr
                 | OpLike | OpILike | OpIn
                 | OpOther String

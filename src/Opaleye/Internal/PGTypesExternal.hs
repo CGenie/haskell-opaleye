@@ -170,6 +170,12 @@ pgRange pgEl start end =
         oneEl R.NegInfinity   = HPQ.NegInfinity
         oneEl R.PosInfinity   = HPQ.PosInfinity
 
+pgTSVector :: String -> Column PGTSVector
+pgTSVector = IPT.castToType "tsvector" . HSD.quote
+
+pgTSQuery :: String -> Column PGTSQuery
+pgTSQuery = IPT.castToType "tsquery" . HSD.quote
+
 instance IsSqlType SqlBool where
   showSqlType _ = "boolean"
 instance IsSqlType SqlDate where
@@ -210,6 +216,9 @@ instance IsSqlType SqlJsonb where
   showSqlType _ = "jsonb"
 instance IsRangeType a => IsSqlType (SqlRange a) where
   showSqlType _ = showRangeType ([] :: [a])
+instance IsSqlType PGTSQuery where
+  showSqlType _ = "tsquery"
+
 
 class IsSqlType pgType => IsRangeType pgType where
   showRangeType :: proxy pgType -> String
@@ -269,6 +278,8 @@ data SqlBytea
 data SqlJson
 data SqlJsonb
 data SqlRange a
+data PGTSQuery
+data PGTSVector
 
 type PGBool = SqlBool
 type PGDate = SqlDate
@@ -290,3 +301,5 @@ type PGBytea = SqlBytea
 type PGJson = SqlJson
 type PGJsonb = SqlJsonb
 type PGRange = SqlRange
+type SqlTSQuery = PGTSQuery
+type SqlTSVector = PGTSVector

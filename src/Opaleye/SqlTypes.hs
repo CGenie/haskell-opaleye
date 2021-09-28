@@ -73,10 +73,12 @@ module Opaleye.SqlTypes (
   sqlUUID,
   sqlLazyByteString,
   sqlStrictByteString,
+  sqlTSQuery,
   -- ** Types
   SqlBool,
   SqlUuid,
   SqlBytea,
+  SqlTSQuery,
   -- * @IsSqlType@
   P.IsSqlType,
   -- * Entire module
@@ -105,7 +107,8 @@ import           Opaleye.Internal.PGTypesExternal (SqlBool,
                                                    SqlBytea,
                                                    SqlJson,
                                                    SqlJsonb,
-                                                   SqlRange)
+                                                   SqlRange,
+                                                   SqlTSQuery)
 
 import qualified Data.Aeson as Ae
 import qualified Data.ByteString as SByteString
@@ -221,3 +224,6 @@ sqlRange :: IsRangeType b
          -> R.RangeBound a
          -> F.Field (SqlRange b)
 sqlRange = P.pgRange
+
+sqlTSQuery :: String -> F.Field SqlTSQuery
+sqlTSQuery = P.pgTSQuery
