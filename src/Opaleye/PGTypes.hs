@@ -153,6 +153,9 @@ pgTSQuery = IPT.castToType "tsquery" . HSD.quote
 toTSQuery :: String -> Column PGTSQuery
 toTSQuery q = C.Column (HPQ.FunExpr "to_tsquery" [HPQ.ConstExpr $ HPQ.StringLit q])
 
+plaintoTSQuery :: String -> Column PGTSQuery
+plaintoTSQuery q = C.Column (HPQ.FunExpr "plainto_tsquery" [HPQ.ConstExpr $ HPQ.StringLit q])
+
 pgArray :: forall a b. IsSqlType b
         => (a -> C.Column b) -> [a] -> C.Column (PGArray b)
 pgArray pgEl xs = C.unsafeCast arrayTy $
